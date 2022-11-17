@@ -1,0 +1,46 @@
+<div class="form-holder">
+  <div class="form-content">
+    <div class="form-items">
+      <div class="form-informations">
+        <label>Lastname : <input type="text" placeholder="Lastname" [(ngModel)]="ngLastname" appCheckFormString />
+        </label> <br>
+        <label>Firstname : <input type="text" placeholder="Firstname" [(ngModel)]="ngFirstname" appCheckFormString />
+        </label> <br>
+        <label>Zip code : <input type="text" placeholder="Zip code" [(ngModel)]="ngZipCode" appCheckFormNumber />
+        </label> <br>
+        <label>Telephone : <input type="tel" placeholder="Telephone" [(ngModel)]="ngTel" appCheckFormNumber /> </label>
+        <br>
+        <label>Email : <input type="email" placeholder="Email" [(ngModel)]="ngEmail" appCheckFormEmail /> </label>
+        <label>Gender : </label>
+        <div id="genderCtn">
+          <label> Male <input type="radio" name="gender" value="Male" [(ngModel)]="ngGender"></label>
+          <label> Female <input type="radio" name="gender" value="Female" [(ngModel)]="ngGender"></label>
+        </div>
+      </div>
+
+      <div class="form-logs">
+          <label>Login : <input type="text" placeholder="Login" [(ngModel)]="ngLogin" /> </label>
+          <label>Password : <input type="password" id="password" placeholder="Password"
+            [(ngModel)]="ngPassword" /> </label>
+          <label>Verification Password : <input type="password" id="verifPassword"
+            placeholder="Verification Password" [(ngModel)]="ngPasswordCheck" /> </label>
+      </div>
+      <!-- <p>Test synchro : {{ngLastname}}</p> -->
+
+      <div>
+        <button (click)="showSummary=true">Send</button>
+      </div>
+
+    </div>
+
+    <ng-container *ngIf="showSummary ; showSummary">
+      <app-component-summary showSummary [lastname]="ngLastname" [firstname]="ngFirstname" [zipCode]="ngZipCode"
+        [tel]="ngTel" [email]="ngEmail" [gender]="ngGender" [login]="ngLogin" [password]="ngPassword"
+        [passwordCheck]="ngPasswordCheck" (change)="clicChange($event)">
+
+      </app-component-summary>
+
+    </ng-container>
+  </div>
+
+</div>

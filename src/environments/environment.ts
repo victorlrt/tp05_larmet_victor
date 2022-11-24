@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   catalogue: '/assets/db/dbMushroom.json',
-  name: 'default',
+  name: 'default'
 };
 
 

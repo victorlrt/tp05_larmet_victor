@@ -15,37 +15,39 @@ export class HeadersInterceptor implements HttpInterceptor {
 
   jwtToken: String = "";
 
-  constructor() { }
+  constructor(private route: Router) { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler):
-    Observable<HttpEvent<any>> {
-
-    return next.handle(req).pipe(tap(
-      (evt: HttpEvent<any>) => {
-        if (evt instanceof HttpResponse) {
-          console.log('---> status:', evt.status);
-        }
-      },
-      (err: any) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            console.log("401 error");
-          }
-          else if (err.status === 403) {
-            console.log("403 error");
-          }
-          else if (err.status === 404) {
-            console.log("404 error");
-          }
-          else if (err.status === 500) {
-            console.log("500 error");
-          }
-          else {
-            console.log("other error");
-          }
-        }
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+      //add jwtToken in every request
+      if (this.jwtToken != "") {
+          request = request.clone({
+              setHeaders: {Authorization: `Bearer ${this.jwtToken}`, 'Content-Type': 'application/json'}
+           });
       }
-    ));
-  }
 
+      return next.handle(request).pipe(tap(
+          (event: HttpEvent<any>) => {
+              if (event instanceof HttpResponse) {
+                  let tab: Array<String>;
+                  let enteteAuthorization = event.headers.get("authorization");
+                  if (enteteAuthorization != null) {
+  
+                      tab = enteteAuthorization.split(/Bearer\s+(.*)$/i);
+                      if (tab.length > 1) {
+  
+                          this.jwtToken = tab[1];
+                      }
+                  }
+              }
+          },
+          (error: HttpErrorResponse) => {
+              if (error instanceof HttpErrorResponse) {
+                  if (error.status === 401) {
+                      // redirection vers la home page
+                      location.reload();
+                  }
+              }
+          }
+      ));
+  }
 }

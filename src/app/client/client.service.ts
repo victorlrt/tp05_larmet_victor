@@ -10,13 +10,14 @@ import { environment } from "src/environments/environment";
 export class ClientService {
 
 
-  constructor(private http: HttpClient) { 
-    
+  constructor(private http: HttpClient) {
+
   }
 
 
   apiUrl: string = environment.api;
   apiTarget: string = "client";
+  clients : Client[] = [];
 
 
   getAllClients(): Observable<Client[]> {
@@ -24,6 +25,10 @@ export class ClientService {
   }
 
   postClient(client: Client): Observable<Client> {
+    client.id = this.clients.length + 1;
+    console.log(client);
+    console.log(this.apiUrl+this.apiTarget);
+
     return this.http.post<Client>(this.apiUrl+this.apiTarget, client);
   }
 

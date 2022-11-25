@@ -38,7 +38,7 @@ export class FormComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(2)]),
     passwordCheck: new FormControl('', [Validators.required, Validators.minLength(2)])
   });
-  
+
 
   clicChange (val : boolean) {
     this.showSummary = val
@@ -55,16 +55,16 @@ export class FormComponent {
     this.client.login = this.clientForm.value.login;
     this.client.password = this.clientForm.value.password;
 
-    console.log(this.client);
-    this.clientService.postClient(this.client).subscribe( data => {
-      console.log(data);
-
-    });
+    this.clientService.postClient(this.client).subscribe(
+      (client) => {
+        this.clientService.clients.push(client);
+      }
+    );
   }
 
 
   // send object to server
-  // display message "client created"	
-  
+  // display message "client created"
+
 
 }

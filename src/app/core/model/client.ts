@@ -1,13 +1,13 @@
 export class Client {
-    id = 0;
-    login = "";
-    password = "";
-    lastname = "";
-    firstname = "";
-    zipCode = "";
-    tel = "";
-    email = "";
-    gender = "";
+    id : number = 0;
+    login : string = "";
+    password : string = "";
+    lastname : string = "";
+    firstname : string = "";
+    zipCode : string = "";
+    tel : string = "";
+    email : string = "";
+    gender: string  = "";
 
-  
+
 }

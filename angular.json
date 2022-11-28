@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/tp05_larmet_victor",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/tp05_larmet_victor",
             "index": "src/index.html",

@@ -17,8 +17,8 @@ export class ProductCatalogueComponent implements OnInit {
 
 
 
-  catalogue$: Observable<Mushroom[]>;
-  uniqueData$: Observable<String[]>;
+  catalogue$!: Observable<Mushroom[]>;
+  uniqueData$!: Observable<String[]>;
 
 
   formSearchText = new FormGroup({
@@ -77,7 +77,7 @@ export class ProductCatalogueComponent implements OnInit {
           mushroom => {
             let boolFilter = false;
             if (this.formSearchText.value.nameFilter != '') {
-              boolFilter = mushroom.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(this.formSearchText.value.nameFilter.toLowerCase()) > -1;
+              boolFilter = mushroom.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(this.formSearchText.value.nameFilter!.toLowerCase()) > -1;
 
             }
               else {

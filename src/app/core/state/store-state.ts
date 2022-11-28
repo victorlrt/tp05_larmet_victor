@@ -62,10 +62,10 @@ export class StoreState {
         const state = getState();
         patchState({
             //delete product if quantity is 1 or decrement quantity
-            mushrooms: state.mushrooms.find((t) => t.id === payload.id).quantity === 1
+            mushrooms: state.mushrooms.find((t) => t.id === payload.id)!.quantity === 1
                 ? state.mushrooms.filter((t) => t.id !== payload.id) //delete product
                 : state.mushrooms.map((m) =>  //decrement quantity
-                m.id == payload.id 
+                m.id == payload.id
                     ? { ...m, quantity: m.quantity - 1 } //decrement quantity
                     : m //keep product
             )

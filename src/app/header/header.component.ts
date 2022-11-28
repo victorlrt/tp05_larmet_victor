@@ -10,7 +10,7 @@ import { StoreState } from '../core/state/store-state';
 })
 export class HeaderComponent {
 
-  @Select(StoreState.getNbMushrooms) nb$: Observable<number>;
+  @Select(StoreState.getNbMushrooms) nb$!: Observable<number>;
   constructor() {}
 
 }

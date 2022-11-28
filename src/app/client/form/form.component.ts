@@ -46,14 +46,14 @@ export class FormComponent {
 
   // create object Client
   createClient() {
-    this.client.lastname = this.clientForm.value.lastname;
-    this.client.firstname = this.clientForm.value.firstname;
-    this.client.zipCode = this.clientForm.value.zipCode;
-    this.client.tel = this.clientForm.value.tel;
-    this.client.email = this.clientForm.value.email;
+    this.client.lastname = this.clientForm.value.lastname!;
+    this.client.firstname = this.clientForm.value.firstname!;
+    this.client.zipCode = this.clientForm.value.zipCode!;
+    this.client.tel = this.clientForm.value.tel!;
+    this.client.email = this.clientForm.value.email!;
     this.client.gender = this.client.gender;
-    this.client.login = this.clientForm.value.login;
-    this.client.password = this.clientForm.value.password;
+    this.client.login = this.clientForm.value.login!;
+    this.client.password = this.clientForm.value.password!;
 
     this.clientService.postClient(this.client).subscribe(
       (client) => {

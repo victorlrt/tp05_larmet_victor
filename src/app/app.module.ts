@@ -5,10 +5,16 @@ import { NgxsModule } from '@ngxs/store';
 import { AppComponent } from './main/app.component';
 import { HeaderComponent } from './header/header.component';
 import {FooterComponent } from  './footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { StoreState } from './core/state/store-state';
+import { HeadersInterceptor } from './headers.interceptor';
+import { ClientService } from './client/client.service';
+import { CatalogueService } from './catalogue/catalogue.service';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './login.service';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,16 +40,24 @@ const routes: Routes = [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    NgxsModule.forRoot([StoreState])
-
+    NgxsModule.forRoot([StoreState]),
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeadersInterceptor,
+      multi: true,
+      deps: [ClientService, CatalogueService, LoginService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

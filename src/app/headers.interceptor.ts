@@ -31,10 +31,10 @@ export class HeadersInterceptor implements HttpInterceptor {
                   let tab: Array<String>;
                   let enteteAuthorization = event.headers.get("authorization");
                   if (enteteAuthorization != null) {
-  
+
                       tab = enteteAuthorization.split(/Bearer\s+(.*)$/i);
                       if (tab.length > 1) {
-  
+
                           this.jwtToken = tab[1];
                       }
                   }
@@ -43,7 +43,6 @@ export class HeadersInterceptor implements HttpInterceptor {
           (error: HttpErrorResponse) => {
               if (error instanceof HttpErrorResponse) {
                   if (error.status === 401) {
-                      // redirection vers la home page
                       location.reload();
                   }
               }

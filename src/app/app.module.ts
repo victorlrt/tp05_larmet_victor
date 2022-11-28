@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgxsModule } from '@ngxs/store';
 
 import { AppComponent } from './main/app.component';
 import { HeaderComponent } from './header/header.component';
@@ -15,6 +14,7 @@ import { CatalogueService } from './catalogue/catalogue.service';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login.service';
 import { FormsModule } from '@angular/forms';
+import { NgxsModule } from '@ngxs/store';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -50,7 +50,7 @@ const routes: Routes = [
     NgxsModule.forRoot([StoreState]),
     FormsModule
   ],
-  providers: [
+  providers: [ LoginService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeadersInterceptor,

@@ -8,7 +8,7 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
